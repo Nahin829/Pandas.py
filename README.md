@@ -224,3 +224,36 @@ print(df2)
 print(df2.loc[0:1])
 x=df2["Salary"][1]
 print(x)
+import csv
+
+# Data to be written to the CSV file
+data_to_write = [
+	['Name', 'Age', 'City'],
+	['John Doe', '30', 'New York'],
+	['Jane Smith', '25', 'London'],
+	['Peter Jones', '42', 'Sydney']
+]
+
+# File path for the CSV file
+csv_file_path = 'my_data.csv'
+
+# Writing to a CSV file
+try:
+	with open(csv_file_path, 'w', newline='') as csvfile:
+		csv_writer = csv.writer(csvfile)
+		csv_writer.writerows(data_to_write)
+	print(f"Successfully wrote data to {csv_file_path}")
+except IOError as e:
+	print(f"Error writing to file: {e}")
+
+# Reading from a CSV file
+try:
+	with open(csv_file_path, 'r', newline='') as csvfile:
+		csv_reader = csv.reader(csvfile)
+		print(f"\nReading data from {csv_file_path}:")
+		for row in csv_reader:
+			print(', '.join(row))
+except FileNotFoundError:
+	print(f"Error: File not found at {csv_file_path}")
+except IOError as e:
+	print(f"Error reading file: {e}")
